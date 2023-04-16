@@ -1,0 +1,65 @@
+@import "../../assets/styles/main.scss";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 1.5%;
+
+  &__policy {
+    color: #eff1f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    flex-direction: column;
+    height: 15%;
+    margin-bottom: 1%;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    height: 84%;
+    justify-content: space-around;
+    padding-top: 1%;
+
+    &__elem {
+      display: flex;
+      width: 18%;
+      justify-content: space-around;
+    }
+
+    &__item {
+      p {
+        color: $color-white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin: 1rem;
+      }
+    }
+  }
+}
+
+.wrap {
+  margin-top: 1.3rem;
+  color: white;
+  font-size: 1.2rem;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 1px 1rem 1px 1rem;
+  display: flex;
+  height: 10%;
+  width: 50%;
+
+  &__icon {
+    margin-right: 5%;
+    background-image: url("../../assets/images/srb.png");
+    background-position: center;
+    background-size: cover;
+    width: 15%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,115 @@
+@import "../../assets/styles/main.scss";
+
+.header {
+  height: 10%;
+  background-color: $background-primary;
+  color: $color-white;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: $color-caramel 0px 20px 30px -10px;
+  position: relative;
+  z-index: 10;
+
+  &-main {
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: space-between;
+
+    &__logo {
+      display: flex;
+      font-size: 3.2rem;
+      letter-spacing: 0.3rem;
+      font-weight: 600;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+
+      &-logo {
+        background-image: url("../../assets/images/logo.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 4rem;
+        width: 4rem;
+        transform: rotate(15deg);
+      }
+      &-text {
+        color: $color-white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__options {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      box-sizing: border-box;
+
+      &-about {
+        font-size: 1.6rem;
+        font-weight: 600;
+        box-sizing: border-box;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.5s;
+      }
+
+      &-login {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.5s;
+
+        &__logo {
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          height: 2.5rem;
+          width: 2.5rem;
+        }
+
+        &__text {
+          font-size: 1.6rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .hover {
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(83, 83, 83, 0.6);
+      transform: scale(1.05);
+      transition: all 0.5s;
+    }
+  }
+}
+
+@media (max-width: 1450px) {
+  .header {
+    &-main {
+      width: 75%;
+    }
+  }
+}
+
+@include respond(tablet) {
+  .header {
+    &-main {
+      width: 90%;
+    }
+  }
+}
