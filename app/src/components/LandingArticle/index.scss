@@ -16,7 +16,7 @@
     margin-bottom: 2%;
 
     &--item {
-      height: 30rem;
+      height: 20rem;
       width: 49%;
       overflow: hidden;
       box-shadow: $color-caramel 0px 3px 8px;
@@ -27,5 +27,10 @@
 @include respond(smallscreen) {
   .cards {
     width: 75%;
+    &__row {
+      &--item {
+        height: 30rem;
+      }
+    }
   }
 }
