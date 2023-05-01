@@ -1,10 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "../pages/Landing";
+import LoginPage from "../pages/Login";
 
 let unregisteredPages = {
   Landing: {
     path: "/",
     component: <LandingPage />,
+  },
+  Login: {
+    path: "/login",
+    component: <LoginPage />,
   },
 };
 

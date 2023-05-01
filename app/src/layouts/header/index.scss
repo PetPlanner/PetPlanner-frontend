@@ -1,5 +1,13 @@
 @import "../../assets/styles/main.scss";
 
+.logButtons {
+  background-color: $color-dark-green;
+  color: $color-white;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  border-color: $color-green;
+}
 .header {
   height: 10%;
   background-color: $background-primary;

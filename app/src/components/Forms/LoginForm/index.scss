@@ -1,0 +1,59 @@
+@import "../../../assets/styles/main.scss";
+
+.login_wrapper {
+  display: flex;
+  justify-content: center;
+}
+.login {
+  margin-top: 12rem;
+  display: flex;
+  justify-content: center;
+  border: 1px solid $color-green;
+  border-right: 30px solid $color-green;
+  width: 40%;
+  border-radius: 3px;
+  background-color: $color-white !important;
+  box-shadow: $color-dark-green 0px 5px 15px;
+}
+.loginForm {
+  width: 80%;
+  &__title {
+    margin-top: 2rem;
+    font-size: 3rem;
+    font-weight: 500;
+    color: $color-green;
+  }
+  &__fields {
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0rem;
+  }
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 80%;
+}
+
+.login__field {
+  height: 4rem;
+}
+
+.login__button {
+  margin-top: 2rem;
+  height: 3rem;
+  color: $color-white;
+  background-color: $color-green;
+  border-radius: 5px;
+  border: 1px solid $color-green;
+  cursor: pointer;
+  box-shadow: $color-dark-green 0px 5px 15px;
+}
+
+.login__button:hover {
+  height: 4rem;
+  transition: all 0.3s;
+  background-color: $color-dark-green;
+}

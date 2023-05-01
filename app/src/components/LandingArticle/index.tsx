@@ -9,7 +9,7 @@ const LandingArticle: React.FC<{ data: Card[] }> = (props) => {
       result.push(
         <div className="cards__row--item">
           <CardItem
-            key={item.url}
+            key={item.url + item.name}
             name={item.name}
             desc={item.desc}
             url={item.url}
