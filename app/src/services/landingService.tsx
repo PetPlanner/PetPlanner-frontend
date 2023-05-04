@@ -11,7 +11,7 @@ export async function getCards() {
       Authorization: "Bearer 1Gp9Rd9hjE-2BSRA3NDBBS4DWRuAx_f5avbTstOaH2Y",
     },
     data: {
-      query: "query {articleCollection{items{title,desc,image{url}}}}",
+      query: "query {articleCollection{items{title,route,desc,image{url}}}}",
     },
   });
   return makeCards(res.data.data.articleCollection.items);
@@ -25,6 +25,7 @@ const makeCards = (data: any): Card[] => {
       name: item.title,
       desc: item.desc,
       url: item.image.url,
+      route: item.route,
     };
     result.push(obj);
   }
