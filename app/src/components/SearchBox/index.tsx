@@ -100,7 +100,7 @@ const SearchBox = (props: any) => {
                       <img
                         src={searchMarker}
                         alt="Marker"
-                        style={{ width: 42, height: 42 }}
+                        style={{ width: 30, height: 30 }}
                       />
                     </ListItemIcon>
                     <ListItemText primary={(item as any)?.display_name} />
