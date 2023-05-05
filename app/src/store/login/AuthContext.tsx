@@ -69,7 +69,7 @@ export const AuthContextProvider = (props: any) => {
 
     localStorage.setItem("token", token);
     localStorage.setItem("expires", expiresIn.toString() + "000");
-
+    console.log("USAO SAM");
     setToken(token);
     setUser(retrieveUserFromToken(token));
     logoutTimer = setTimeout(logoutHandler, remainingTime);
@@ -80,6 +80,7 @@ export const AuthContextProvider = (props: any) => {
     setUser({ email: "", id: "", role: "" });
     localStorage.removeItem("token");
     localStorage.removeItem("expires");
+    console.log("ALI I OVDE");
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);

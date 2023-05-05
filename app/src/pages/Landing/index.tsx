@@ -21,9 +21,6 @@ const LandingPage = () => {
       <div className="landing__cards">
         <LandingArticle data={data} />
       </div>
-      <div className="landing__footer">
-        <Footer />
-      </div>
     </div>
   );
 };
