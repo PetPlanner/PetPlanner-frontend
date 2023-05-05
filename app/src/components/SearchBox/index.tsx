@@ -8,9 +8,12 @@ import {
   ListItemIcon,
   ListItemText,
   OutlinedInput,
+  colors,
 } from "@mui/material";
 import loupe from "../../assets/images/loupe.png";
 import searchMarker from "../../assets/images/map-marker-icon.png";
+import CircularProgress from "@mui/material/CircularProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 const params = {
@@ -24,6 +27,7 @@ const SearchBox = (props: any) => {
   const { selectPosition, setSelectPosition } = props;
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div
@@ -50,6 +54,7 @@ const SearchBox = (props: any) => {
             variant="contained"
             color="primary"
             onClick={() => {
+              setLoading(true);
               // Search
               const params = {
                 q: searchText,
@@ -70,6 +75,7 @@ const SearchBox = (props: any) => {
                 .then((result) => {
                   console.log(JSON.parse(result));
                   setListPlace(JSON.parse(result));
+                  setLoading(false);
                   setRender(true);
                 })
                 .catch((err) => console.log("err: ", err));
@@ -79,6 +85,7 @@ const SearchBox = (props: any) => {
           </Button>
         </div>
       </div>
+      {loading && <LinearProgress />}
       {isRender && (
         <div style={{ height: "20vh" }}>
           <List

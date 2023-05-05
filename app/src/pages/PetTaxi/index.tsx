@@ -8,6 +8,7 @@ import L from "leaflet";
 import petTaxi from "../../assets/images/pet-taxi.png";
 import endIcon from "../../assets/images/map.png";
 import { useState } from "react";
+import { Button } from "@mui/material";
 
 let StartIcon = L.icon({
   iconUrl: petTaxi,
@@ -32,6 +33,10 @@ const PetTaxi = () => {
     return <Marker icon={EndIcon} position={selectEndPosition as any}></Marker>;
   };
 
+  const renderStartButton = () => {
+    return selectStartPosition != null && selectEndPosition != null;
+  };
+
   return (
     <>
       <div className="taxi">
@@ -50,6 +55,23 @@ const PetTaxi = () => {
               setSelectPosition={setSelectEndPosition}
             />
           </div>
+          {renderStartButton() && (
+            <Button
+              style={{
+                backgroundColor: "#b30c2e",
+                color: "white",
+                marginTop: "3rem",
+                width: "100%",
+                height: "5rem",
+                fontSize: "2rem",
+                fontWeight: "600",
+              }}
+              variant="contained"
+              color="primary"
+            >
+              S T A R T
+            </Button>
+          )}
         </div>
         <div className="taxi__map" id="map">
           <MapContainer
