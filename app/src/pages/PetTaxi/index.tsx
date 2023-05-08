@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { startTaxi, getCordinates } from "../../services/petTaxiService";
 import startIcon from "../../assets/images/owner.png";
+import confetti from "canvas-confetti";
 
 let StartIcon = L.icon({
   iconUrl: startIcon,
@@ -89,6 +90,12 @@ const PetTaxi = () => {
                 let counter = 0;
                 const interval = setInterval(() => {
                   if (counter === cords.length) {
+                    confetti({
+                      particleCount: 200,
+                      startVelocity: 50,
+                      spread: 360,
+                      zIndex: 500,
+                    });
                     clearInterval(interval);
                     return;
                   }
@@ -97,7 +104,7 @@ const PetTaxi = () => {
                     cords.at(counter)[0] as any,
                   ] as any);
                   counter++;
-                }, 400);
+                }, 100);
               }}
             >
               S T A R T
