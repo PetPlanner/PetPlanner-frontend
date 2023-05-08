@@ -3,25 +3,32 @@ import SearchBox from "../../components/SearchBox";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
-import iconMarker from "leaflet/dist/images/marker-icon.png";
 import L from "leaflet";
 import petTaxi from "../../assets/images/pet-taxi.png";
 import endIcon from "../../assets/images/map.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
+import { startTaxi, getCordinates } from "../../services/petTaxiService";
+import startIcon from "../../assets/images/owner.png";
 
 let StartIcon = L.icon({
-  iconUrl: petTaxi,
+  iconUrl: startIcon,
   shadowUrl: iconShadow,
 });
 let EndIcon = L.icon({
   iconUrl: endIcon,
   shadowUrl: iconShadow,
 });
+let Taxi = L.icon({
+  iconUrl: petTaxi,
+  shadowUrl: iconShadow,
+});
 
 const PetTaxi = () => {
+  const [position, setPosition] = useState();
   const [selectStartPosition, setSelectStartPosition] = useState(null);
   const [selectEndPosition, setSelectEndPosition] = useState(null);
+  const [coordinates, setCoordinates] = useState([]);
 
   const renderStartMarker = () => {
     return (
@@ -35,6 +42,10 @@ const PetTaxi = () => {
 
   const renderStartButton = () => {
     return selectStartPosition != null && selectEndPosition != null;
+  };
+
+  const renderCar = () => {
+    return <Marker position={position as any} icon={Taxi}></Marker>;
   };
 
   return (
@@ -68,6 +79,26 @@ const PetTaxi = () => {
               }}
               variant="contained"
               color="primary"
+              onClick={async () => {
+                const cords = await getCordinates(
+                  String((selectStartPosition as any).lon),
+                  String((selectStartPosition as any).lat),
+                  String((selectEndPosition as any).lon),
+                  String((selectEndPosition as any).lat)
+                );
+                let counter = 0;
+                const interval = setInterval(() => {
+                  if (counter === cords.length) {
+                    clearInterval(interval);
+                    return;
+                  }
+                  setPosition([
+                    cords.at(counter)[1] as any,
+                    cords.at(counter)[0] as any,
+                  ] as any);
+                  counter++;
+                }, 400);
+              }}
             >
               S T A R T
             </Button>
@@ -80,13 +111,11 @@ const PetTaxi = () => {
             style={{ height: "100%" }}
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            {/* <Marker
-              icon={DefaultIconHospital}
-              position={[45.246219799792556, 19.851756995545784]}
-            ></Marker> */}
+            {position && renderCar()}
             {selectStartPosition && renderStartMarker()}
             {selectEndPosition && renderEndMarker()}
           </MapContainer>
+          <div></div>
         </div>
       </div>
     </>

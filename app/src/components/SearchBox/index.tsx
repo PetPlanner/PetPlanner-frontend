@@ -73,7 +73,6 @@ const SearchBox = (props: any) => {
               )
                 .then((response) => response.text())
                 .then((result) => {
-                  console.log(JSON.parse(result));
                   setListPlace(JSON.parse(result));
                   setLoading(false);
                   setRender(true);
