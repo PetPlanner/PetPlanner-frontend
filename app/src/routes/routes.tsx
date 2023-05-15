@@ -1,10 +1,20 @@
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "../pages/Landing";
+import PetTaxi from "../pages/PetTaxi";
+import LoginPage from "../pages/Login";
 
 let unregisteredPages = {
   Landing: {
     path: "/",
     component: <LandingPage />,
+  },
+  PetTaxi: {
+    path: "/pet-taxi",
+    component: <PetTaxi />,
+  },
+  Login: {
+    path: "/login",
+    component: <LoginPage />,
   },
 };
 
