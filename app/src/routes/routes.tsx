@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "../pages/Landing";
 import PetTaxi from "../pages/PetTaxi";
 import LoginPage from "../pages/Login";
+import RegisterPage from "../pages/Register";
 
 let unregisteredPages = {
   Landing: {
@@ -15,6 +16,10 @@ let unregisteredPages = {
   Login: {
     path: "/login",
     component: <LoginPage />,
+  },
+  Register: {
+    path: "/register",
+    component: <RegisterPage />,
   },
 };
 
