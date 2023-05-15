@@ -1,10 +1,6 @@
-import { useContext } from "react";
 import "./index.scss";
-import AuthContext from "../../store/login/AuthContext";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-  const context = useContext(AuthContext);
-  const isLoggedIn = context.isLoggedIn;
   const navigate = useNavigate();
 
   const getLoggedButtons = () => {
