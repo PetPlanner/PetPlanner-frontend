@@ -1,19 +1,37 @@
+import { useContext } from "react";
+import NavButton from "../../components/Button";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../utils/store/AuthContext";
 const Header = () => {
   const navigate = useNavigate();
+  const context = useContext(AuthContext);
+  let role = context.user.role;
+  let isLoggedIn = context.isLoggedIn;
+  const logoutHandler = () => {
+    context.logout();
+    navigate("/");
+  };
+  const getLogoutButton = () => {
+    return <NavButton text="Logout" submitHandler={logoutHandler} />;
+  };
 
-  const getLoggedButtons = () => {
+  const getLoginRegisterButtons = () => {
     return (
       <>
-        <button className="logButtons" onClick={() => navigate("/login")}>
-          Login
-        </button>
-        <button className="logButtons" onClick={() => navigate("/register")}>
-          Sign up
-        </button>
+        <NavButton
+          text={"Login"}
+          submitHandler={() => navigate("/login")}
+        ></NavButton>
+        <NavButton
+          text={"Sign up"}
+          submitHandler={() => navigate("/register")}
+        ></NavButton>
       </>
     );
+  };
+  const getLoggedButtons = () => {
+    return <>{isLoggedIn ? getLogoutButton() : getLoginRegisterButtons()}</>;
   };
   return (
     <div className={"header"}>

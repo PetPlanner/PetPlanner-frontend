@@ -11,9 +11,9 @@ function App() {
       <Header />
       {getRoutes()}
       <ToastContainer />
-      <div className="landing__footer">
+      {/* <div className="landing__footer">
         <Footer />
-      </div>
+      </div> */}
     </div>
   );
 }

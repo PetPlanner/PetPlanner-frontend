@@ -2,10 +2,16 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import "./index.scss";
 import { login } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
-import { WarningMessage } from "../../../utils/toastService/toastService";
+import {
+  SuccesMessage,
+  WarningMessage,
+} from "../../../utils/toastService/toastService";
+import { useContext } from "react";
+import AuthContext from "../../../utils/store/AuthContext";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const context = useContext(AuthContext);
 
   return (
     <div className="login-form">
@@ -41,8 +47,9 @@ const LoginForm = () => {
               WarningMessage("Wrong credentials");
               return;
             }
+            context.login(res.data.token);
+            SuccesMessage("Welcome back!");
             navigate("/");
-            console.log(res.data.token);
             setSubmitting(false);
           }}
         >
