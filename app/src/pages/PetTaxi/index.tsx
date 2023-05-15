@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 import { startTaxi, getCordinates } from "../../services/petTaxiService";
 import startIcon from "../../assets/images/owner.png";
 import confetti from "canvas-confetti";
+import Card from "../../components/Card";
 
 let StartIcon = L.icon({
   iconUrl: startIcon,
@@ -50,7 +51,7 @@ const PetTaxi = () => {
   };
 
   return (
-    <>
+    <div className="taxi-wrapper">
       <div className="taxi">
         <div className="taxi__input">
           <div className="taxi__input__field">
@@ -104,7 +105,7 @@ const PetTaxi = () => {
                     cords.at(counter)[0] as any,
                   ] as any);
                   counter++;
-                }, 100);
+                }, 500);
               }}
             >
               S T A R T
@@ -125,7 +126,7 @@ const PetTaxi = () => {
           <div></div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
