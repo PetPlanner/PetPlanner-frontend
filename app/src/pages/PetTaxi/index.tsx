@@ -12,6 +12,7 @@ import { startTaxi, getCordinates } from "../../services/petTaxiService";
 import startIcon from "../../assets/images/owner.png";
 import confetti from "canvas-confetti";
 import Card from "../../components/Card";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 
 let StartIcon = L.icon({
   iconUrl: startIcon,
@@ -31,7 +32,7 @@ const PetTaxi = () => {
   const [selectStartPosition, setSelectStartPosition] = useState(null);
   const [selectEndPosition, setSelectEndPosition] = useState(null);
   const [coordinates, setCoordinates] = useState([]);
-
+  useRouteProtector({ roles: ["USER", "ADMIN"] });
   const renderStartMarker = () => {
     return (
       <Marker icon={StartIcon} position={selectStartPosition as any}></Marker>
@@ -116,7 +117,7 @@ const PetTaxi = () => {
           <MapContainer
             center={[45.246219799792556, 19.851756995545784]}
             zoom={13}
-            style={{ height: "100%" }}
+            style={{ height: "100%", opacity: "1" }}
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {position && renderCar()}

@@ -17,7 +17,7 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  opacity: 0.9;
+  opacity: 0.95;
   width: 80vw;
 
   &__input {
@@ -32,8 +32,8 @@
 
   &__map {
     width: 70%;
-    background-color: green;
     margin-left: 3rem;
+    opacity: 1;
   }
 }
 
@@ -44,5 +44,5 @@
 #map {
   width: 70%;
   height: 100%;
-  background-color: yellow;
+  opacity: 1;
 }

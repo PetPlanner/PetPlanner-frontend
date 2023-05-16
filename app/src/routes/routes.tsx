@@ -1,8 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "../pages/Landing";
 import PetTaxi from "../pages/PetTaxi";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
+import ErrorPage from "../pages/404";
 
 let unregisteredPages = {
   Landing: {
@@ -20,6 +21,22 @@ let unregisteredPages = {
   Register: {
     path: "/register",
     component: <RegisterPage />,
+  },
+  Unauthorized: {
+    path: "/401",
+    component: <ErrorPage errorCode={"1"} />,
+  },
+  Forbidden: {
+    path: "/403",
+    component: <ErrorPage errorCode={"3"} />,
+  },
+  NotFound: {
+    path: "/404",
+    component: <ErrorPage errorCode={"4"} />,
+  },
+  Redirect: {
+    path: "*",
+    component: <Navigate to="/404" />,
   },
 };
 
