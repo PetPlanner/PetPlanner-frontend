@@ -66,9 +66,10 @@ export const AuthContextProvider = (props: any) => {
   const loginHandler = (token: string) => {
     let decodedToken = jwt(token);
     let expiresIn = (decodedToken as any).exp;
-
-    const remainingTime = calculateRemainingTime(expiresIn);
-
+    const remainingTime = calculateRemainingTime(
+      Number(expiresIn.toString() + "000")
+    );
+    console.log(remainingTime);
     localStorage.setItem("token", token);
     localStorage.setItem("expires", expiresIn.toString() + "000");
 
@@ -82,9 +83,7 @@ export const AuthContextProvider = (props: any) => {
     setUser({ email: "", id: "", role: "" });
     localStorage.removeItem("token");
     localStorage.removeItem("expires");
-
     InfoMessage("Goodbye!");
-
     if (logoutTimer) {
       clearTimeout(logoutTimer);
     }

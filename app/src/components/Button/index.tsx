@@ -4,6 +4,7 @@ import "./index.scss";
 type Props = {
   submitHandler: MouseEventHandler;
   text: String;
+  style?: React.CSSProperties;
 };
 
 const NavButton = (props: Props) => {

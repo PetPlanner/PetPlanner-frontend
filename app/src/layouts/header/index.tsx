@@ -13,7 +13,15 @@ const Header = () => {
     navigate("/");
   };
   const getLogoutButton = () => {
-    return <NavButton text="Logout" submitHandler={logoutHandler} />;
+    return (
+      <>
+        <NavButton
+          text="Profile"
+          submitHandler={() => navigate("/my-profile")}
+        />
+        <NavButton text="Logout" submitHandler={logoutHandler} />
+      </>
+    );
   };
 
   const getLoginRegisterButtons = () => {
@@ -30,6 +38,8 @@ const Header = () => {
       </>
     );
   };
+
+  const getProfileButton = () => {};
   const getLoggedButtons = () => {
     return <>{isLoggedIn ? getLogoutButton() : getLoginRegisterButtons()}</>;
   };

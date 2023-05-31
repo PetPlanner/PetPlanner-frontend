@@ -41,7 +41,6 @@ const LoginForm = () => {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             let res: any;
-            console.log(values);
             res = await login(values);
             if (!res || !res.data) {
               WarningMessage("Wrong credentials");

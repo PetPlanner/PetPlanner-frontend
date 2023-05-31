@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../../services/authService";
 import { WarningMessage } from "../../../utils/toastService/toastService";
 
 const initValue = {
@@ -13,7 +14,7 @@ const initValue = {
   country: "",
   city: "",
   street: "",
-  title: "",
+  role: "",
 };
 const validationRule = (values: any) => {
   const required = "This field is required.";
@@ -46,11 +47,11 @@ const validationRule = (values: any) => {
   if (!values.street) {
     errors.street = required;
   }
-  if (!values.title) {
-    errors.title = required;
-  }
   if (!values.lastName) {
     errors.lastName = required;
+  }
+  if (!values.role) {
+    errors.role = required;
   }
   if (!values.phoneNumber) {
     errors.phoneNumber = required;
@@ -75,13 +76,25 @@ const RegisterForm = () => {
         validate={validationRule}
         onSubmit={async (values, { setSubmitting }) => {
           let res: any;
-          console.log(values);
-          //   if (!res || !res.data) {
-          //     WarningMessage("Wrong credentials");
-          //     return;
-          //   }
-          //   navigate("/");
-          //   console.log(res.data.token);
+          let registerDto: any = {
+            email: values.email,
+            firstname: values.firstName,
+            lastname: values.lastName,
+            password: values.password,
+            role: values.role,
+            phoneNumber: values.phoneNumber,
+            address: {
+              street: values.street,
+              country: values.country,
+              city: values.city,
+            },
+          };
+          res = await register(registerDto);
+          if (!res || !res.data) {
+            WarningMessage("Something went wrong, try again later...");
+            return;
+          }
+          navigate("/login");
           setSubmitting(false);
         }}
       >
@@ -224,21 +237,26 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="register-form__container__row__field-wrapper">
-                {/* TTILE */}
                 <Field
-                  type="text"
-                  name="title"
+                  as="select"
+                  name="role"
                   className="register-form__container__row__field-wrapper--field"
-                  placeholder="Title"
-                />
+                >
+                  <option value="">Select role...</option>
+                  <option value="CUSTOMER">Customer</option>
+                  <option value="DRIVER">Driver</option>
+                  <option value="WALKER">Walker</option>
+                  <option value="VET">Vet</option>
+                  <option value="TRAINER">Trainer</option>
+                </Field>
                 <ErrorMessage
-                  name="title"
+                  name="address"
                   component="div"
                   className="register-form__container__row__field-wrapper--error"
                 />
               </div>
             </div>
-            <div className="register-form__container--button">
+            <div className="register-form__container__row--button">
               <button
                 type="submit"
                 disabled={isSubmitting}

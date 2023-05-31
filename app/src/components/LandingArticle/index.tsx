@@ -12,13 +12,9 @@ const LandingArticle: React.FC<{ data: Card[] }> = (props) => {
         <div
           className="cards__row--item"
           onClick={() => navigate(`/${item.route}`)}
+          key={item.route}
         >
-          <CardItem
-            key={item.route}
-            name={item.name}
-            desc={item.desc}
-            url={item.url}
-          />
+          <CardItem name={item.name} desc={item.desc} url={item.url} />
         </div>
       );
     }
