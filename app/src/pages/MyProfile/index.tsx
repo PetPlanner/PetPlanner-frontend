@@ -7,10 +7,13 @@ import "./index.scss";
 import AuthContext from "../../utils/store/AuthContext";
 import { findUserById } from "../../services/userService";
 import { WarningMessage } from "../../utils/toastService/toastService";
+import { findPetsByUserId } from "../../services/petService";
+import Pet from "../../model/pet";
 
 const MyProfilePage = () => {
   const [user, setUser] = useState();
   const context = useContext(AuthContext);
+  const [pets, setPets] = useState<Pet[]>([]);
 
   const fetchLoggedUser = async () => {
     let response: any;
@@ -22,9 +25,35 @@ const MyProfilePage = () => {
     setUser(response.data);
   };
 
+  const fetchPets = async () => {
+    let res;
+    res = await findPetsByUserId(+context.user.id);
+    if (!res && !res.data) {
+      WarningMessage("Something went wrong.");
+      return;
+    }
+    setPets(res.data);
+  };
   useEffect(() => {
     fetchLoggedUser();
+    fetchPets();
   }, [context.user]);
+
+  const getPetCards = () => {
+    let retVal = [];
+    for (let pet of pets) {
+      let imgUrl = `/dog${pet.id % 9}.jpg`;
+      retVal.push(
+        <FlipCard
+          width={cardSize}
+          height={cardSize}
+          img={imgUrl}
+          name={pet.name}
+        />
+      );
+    }
+    return retVal;
+  };
 
   const cardSize = "9vw";
   return (
@@ -66,30 +95,7 @@ const MyProfilePage = () => {
                   Pets
                 </div>
                 <div className="my-profile-page__container__pets--content">
-                  <FlipCard
-                    width={cardSize}
-                    height={cardSize}
-                    img="/dog1.jpg"
-                    name="REA"
-                  />
-                  <FlipCard
-                    width={cardSize}
-                    height={cardSize}
-                    img="/dog2.jpg"
-                    name="REX"
-                  />
-                  <FlipCard
-                    width={cardSize}
-                    height={cardSize}
-                    img="/dog3.jpg"
-                    name="ASKA"
-                  />
-                  <FlipCard
-                    width={cardSize}
-                    height={cardSize}
-                    img="/dog4.jpg"
-                    name="MUNJA"
-                  />
+                  {pets && getPetCards()}
                 </div>
                 <NavButton
                   text={"Add Pets"}

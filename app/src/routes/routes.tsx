@@ -5,6 +5,7 @@ import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import ErrorPage from "../pages/404";
 import MyProfilePage from "../pages/MyProfile";
+import WalkingPage from "../pages/PetWalking";
 
 let unregisteredPages = {
   Landing: {
@@ -14,6 +15,10 @@ let unregisteredPages = {
   PetTaxi: {
     path: "/pet-taxi",
     component: <PetTaxi />,
+  },
+  PetWalking: {
+    path: "/pet-walking",
+    component: <WalkingPage />,
   },
   Login: {
     path: "/login",
