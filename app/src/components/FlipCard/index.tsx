@@ -5,6 +5,7 @@ interface FlipCardProps {
   height: string;
   img: string;
   name: string;
+  onClick: () => void;
 }
 
 const FlipCard: React.FC<FlipCardProps> = (props: FlipCardProps) => {
@@ -12,6 +13,7 @@ const FlipCard: React.FC<FlipCardProps> = (props: FlipCardProps) => {
     <div
       className="flip-card"
       style={{ width: props.width, height: props.height }}
+      onClick={props.onClick}
     >
       <div className="flip-card-inner">
         <div

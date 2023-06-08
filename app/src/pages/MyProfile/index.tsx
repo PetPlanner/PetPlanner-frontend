@@ -16,6 +16,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 const initValue = {
   name: "",
@@ -43,7 +44,7 @@ const MyProfilePage = () => {
   const context = useContext(AuthContext);
   const [pets, setPets] = useState<Pet[]>([]);
   const [open, setOpen] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const fetchLoggedUser = async () => {
     let response: any;
     response = await findUserById(Number(context.user.id));
@@ -79,6 +80,7 @@ const MyProfilePage = () => {
           img={imgUrl}
           name={pet.name}
           key={pet.id}
+          onClick={() => navigate(`/pet/${pet.id}`)}
         />
       );
     }
