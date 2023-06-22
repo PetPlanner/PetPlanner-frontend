@@ -1,0 +1,46 @@
+@import "../../assets/styles/main.scss";
+
+.vet-station {
+  padding-top: 5vh;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+
+  &__search {
+    height: 12%;
+  }
+
+  &__content {
+    height: 88%;
+    padding-top: 3%;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    z-index: 0;
+
+    &__map {
+      width: 50%;
+      height: 100%;
+      padding: 1%;
+      box-sizing: border-box;
+    }
+
+    &__data {
+      width: 50%;
+      height: 100%;
+      padding: 1%;
+      box-sizing: border-box;
+
+      &--title {
+        font-size: 2rem;
+        letter-spacing: 0.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $color-logo-border;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

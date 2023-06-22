@@ -4,6 +4,9 @@
   margin-top: 5vh;
   font-size: 15rem;
   letter-spacing: 2rem;
+  width: 100vw;
+  height: 50vh;
+  box-sizing: border-box;
 
   &__code {
     display: flex;

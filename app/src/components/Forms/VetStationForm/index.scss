@@ -1,0 +1,25 @@
+@import "../../../assets/styles/main.scss";
+
+.vet-form {
+  width: 100%;
+  height: 25vh;
+
+  &__info {
+    &__row {
+      display: flex;
+      padding: 1rem 2rem;
+      align-items: center;
+      &--icon {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      &--data {
+        margin-left: 7%;
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
