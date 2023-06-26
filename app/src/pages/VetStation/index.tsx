@@ -17,6 +17,7 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { createVetStation } from "../../services/vetService";
 import { WarningMessage } from "../../utils/toastService/toastService";
+import Comment from "../../components/Comment";
 
 let ClinicIcon = L.icon({
   iconUrl: clinicIcon,
@@ -134,6 +135,20 @@ const VetStationPage = () => {
                   />
                 )}
               </div>
+              {selectedStation && (
+                <div className="vet-station__content__comment">
+                  <div className="vet-station__content__comment--title">
+                    Comments
+                  </div>
+                  <Comment
+                    name="Nikola Kalinic"
+                    comment="Surim bika"
+                    date={new Date()}
+                    grade={5}
+                  ></Comment>
+                  {/* <Comment></Comment> */}
+                </div>
+              )}
             </Card>
           </div>
         </div>

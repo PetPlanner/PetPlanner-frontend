@@ -1,0 +1,56 @@
+@import "../../assets/styles/main.scss";
+
+.comment__container {
+  background-color: #fdf9f3;
+  width: 96%;
+  height: 30%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-left: 4%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2%;
+  box-shadow: $color-logo-border 0px 2px 8px 0px;
+
+  &--img {
+    background-image: url("../../assets/images/user.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 10%;
+    height: 100%;
+    margin-right: 5%;
+    margin-left: 2%;
+  }
+
+  &__content {
+    width: 80%;
+
+    &--comment {
+      padding: 0 2%;
+      text-align: left;
+      font-size: 1.3rem;
+    }
+    &__data {
+      //   margin-top: 2%;
+      padding: 2%;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      box-sizing: border-box;
+
+      &--user {
+        font-size: 1.7rem;
+        font-weight: 700;
+        display: flex;
+        width: 70%;
+      }
+      &--grade {
+        padding-left: 5%;
+      }
+      &--data {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
