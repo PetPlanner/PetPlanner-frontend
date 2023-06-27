@@ -2,7 +2,7 @@ import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import Card from "../../components/Card";
 import "./index.scss";
 import SearchComponent from "../../components/Search";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import L from "leaflet";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import clinicIcon from "../../assets/images/clinic.png";
@@ -13,11 +13,18 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  TextField,
+  Rating,
 } from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { createVetStation } from "../../services/vetService";
-import { WarningMessage } from "../../utils/toastService/toastService";
+import {
+  SuccesMessage,
+  WarningMessage,
+} from "../../utils/toastService/toastService";
 import Comment from "../../components/Comment";
+import { create, findByObjectIdAndStatus } from "../../services/commentService";
+import CommentModel from "../../model/comment";
 
 let ClinicIcon = L.icon({
   iconUrl: clinicIcon,
@@ -74,13 +81,73 @@ const validationRule = (values: any) => {
 
 const VetStationPage = () => {
   const [selectedStation, setSelectedStation] = useState();
+  const [comments, setComments] = useState<CommentModel[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const context = useContext(AuthContext);
+  const [newCommnet, setNewComment] = useState();
+  const [rating, setRating] = useState<number | null>(0);
 
-  const handleData = (data: any) => {
+  const handleData = async (data: any) => {
     setSelectedStation(data);
+    fetchComments(data.id);
   };
 
+  const fetchComments = async (id: number) => {
+    let response: any;
+    response = await findByObjectIdAndStatus(id, "VET");
+    if (!response || !response.data) {
+      WarningMessage("Something went wrong.");
+      return;
+    }
+    setComments(response.data);
+  };
+  const getCommentList = () => {
+    let retVal = [];
+    if (comments.length === 0) {
+      retVal.push(<div className="no-comment">No comments yet.</div>);
+    }
+    for (let c of comments) {
+      retVal.push(
+        <Comment
+          name={c.name}
+          comment={c.comment}
+          date={
+            new Date(
+              c.date.at(0) as any,
+              c.date.at(1) as any,
+              c.date.at(2) as any,
+              c.date.at(3) as any,
+              c.date.at(4) as any,
+              c.date.at(5) as any
+            )
+          }
+          grade={c.grade}
+          key={c.id}
+        />
+      );
+    }
+    return retVal;
+  };
+  useEffect(() => {
+    if (selectedStation) fetchComments((selectedStation as any).id);
+  }, [comments]);
+  const handlePostComment = async () => {
+    let res: any;
+    let dto = {
+      grade: rating,
+      comment: newCommnet,
+      userId: context.user.id,
+      objectId: (selectedStation as any).id,
+      objectType: "VET",
+    };
+    res = await create(dto);
+    if (!res || !res.data) {
+      WarningMessage("Something went wrong");
+      return;
+    }
+    setComments(res.data);
+    SuccesMessage("The comment has been successfully posted.");
+  };
   const renderClinicMarker = () => {
     return (
       <Marker
@@ -120,7 +187,11 @@ const VetStationPage = () => {
           </div>
           <div className="vet-station__content__data">
             <Card width="100%" height="100%">
-              <div>
+              <div style={{ position: "relative" }}>
+                {selectedStation &&
+                  (selectedStation as any).avgGrade >= 4.5 && (
+                    <div className="achivment"></div>
+                  )}
                 <div className="vet-station__content__data--title">
                   {selectedStation && (selectedStation as any).name}
                 </div>
@@ -140,13 +211,35 @@ const VetStationPage = () => {
                   <div className="vet-station__content__comment--title">
                     Comments
                   </div>
-                  <Comment
-                    name="Nikola Kalinic"
-                    comment="Surim bika"
-                    date={new Date()}
-                    grade={5}
-                  ></Comment>
-                  {/* <Comment></Comment> */}
+                  <div className="vet-station__content__comment--list">
+                    {comments && getCommentList()}
+                  </div>
+                  <div className="vet-station__content__comment--post">
+                    <div className="vet-station__content__comment--post--input">
+                      <Rating
+                        name="simple-controlled"
+                        value={rating}
+                        precision={0.5}
+                        onChange={(event, newValue) => {
+                          setRating(newValue);
+                        }}
+                      />
+                      <input
+                        className="vet-station__content__comment--post--input--field"
+                        type="text"
+                        placeholder="Share your comment with anyone, or everyone."
+                        onChange={(e: any) => {
+                          setNewComment(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <button
+                      className="comment--button"
+                      onClick={handlePostComment}
+                    >
+                      POST
+                    </button>
+                  </div>
                 </div>
               )}
             </Card>

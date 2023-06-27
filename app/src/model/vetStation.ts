@@ -5,4 +5,5 @@ export default interface VetStation {
   name: string;
   address: Address;
   hostId: number;
+  avgGrade: number;
 }

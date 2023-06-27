@@ -21,7 +21,7 @@ const Comment: React.FC<CommentProps> = (props: CommentProps) => {
               <Rating
                 name="half-rating"
                 defaultValue={props.grade}
-                precision={0.1}
+                precision={0.5}
                 readOnly
               />
             </div>
