@@ -6,12 +6,16 @@ import "leaflet-routing-machine";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import startIcon from "../../assets/images/owner.png";
 import "leaflet/dist/leaflet.css";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 
 let StartIcon = L.icon({
   iconUrl: startIcon,
   shadowUrl: iconShadow,
 });
 const WalkingPage = () => {
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
   const MapComponent = () => {
     const map = useMap();
 

@@ -32,7 +32,9 @@ const PetTaxi = () => {
   const [selectStartPosition, setSelectStartPosition] = useState(null);
   const [selectEndPosition, setSelectEndPosition] = useState(null);
   const [coordinates, setCoordinates] = useState([]);
-  useRouteProtector({ roles: ["USER", "ADMIN"] });
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
   const renderStartMarker = () => {
     return (
       <Marker icon={StartIcon} position={selectStartPosition as any}></Marker>

@@ -13,6 +13,7 @@ import ImageGallery from "react-image-gallery";
 import { Rating } from "@mui/material";
 import Comment from "../../components/Comment";
 import HotelForm from "../../components/Forms/HotelForm";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 
 const images = [
   {
@@ -32,6 +33,9 @@ const PetHotel = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [newCommnet, setNewComment] = useState();
   const [rating, setRating] = useState<number | null>(0);
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
 
   const handleData = async (data: any) => {
     setSelectedStation(data);

@@ -25,6 +25,7 @@ import {
 import Comment from "../../components/Comment";
 import { create, findByObjectIdAndStatus } from "../../services/commentService";
 import CommentModel from "../../model/comment";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 
 let ClinicIcon = L.icon({
   iconUrl: clinicIcon,
@@ -86,6 +87,9 @@ const VetStationPage = () => {
   const context = useContext(AuthContext);
   const [newCommnet, setNewComment] = useState();
   const [rating, setRating] = useState<number | null>(0);
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
 
   const handleData = async (data: any) => {
     setSelectedStation(data);
