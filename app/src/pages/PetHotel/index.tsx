@@ -9,20 +9,10 @@ import {
 } from "../../utils/toastService/toastService";
 import CommentModel from "../../model/comment";
 import { create, findByObjectIdAndStatus } from "../../services/commentService";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
-import petHotelIcon from "../../assets/images/pet-hotel.png";
-import L from "leaflet";
 import ImageGallery from "react-image-gallery";
-import VetStationForm from "../../components/Forms/VetStationForm";
 import { Rating } from "@mui/material";
 import Comment from "../../components/Comment";
 import HotelForm from "../../components/Forms/HotelForm";
-
-let ClinicIcon = L.icon({
-  iconUrl: petHotelIcon,
-  shadowUrl: iconShadow,
-});
 
 const images = [
   {
@@ -106,18 +96,6 @@ const PetHotel = () => {
       return;
     }
     setComments(response.data);
-  };
-
-  const renderClinicMarker = () => {
-    return (
-      <Marker
-        icon={ClinicIcon}
-        position={[
-          (selectedStation as any).address.lat,
-          (selectedStation as any).address.lon,
-        ]}
-      ></Marker>
-    );
   };
 
   return (

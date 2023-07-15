@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
-import { register } from "../../../services/authService";
+import { getCords, register } from "../../../services/authService";
 import { WarningMessage } from "../../../utils/toastService/toastService";
 
 const initValue = {
@@ -68,6 +68,7 @@ const validationRule = (values: any) => {
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+
   return (
     <div className="register-form">
       <div className="register-form--title">Registration</div>
@@ -76,6 +77,16 @@ const RegisterForm = () => {
         validate={validationRule}
         onSubmit={async (values, { setSubmitting }) => {
           let res: any;
+          let tmp: any;
+          tmp = await getCords({
+            street: values.street,
+            city: values.city,
+            country: values.country,
+          });
+          if (!tmp || !tmp.data || tmp.data.length === 0) {
+            WarningMessage("Your address is not correct.");
+            return;
+          }
           let registerDto: any = {
             email: values.email,
             firstname: values.firstName,
@@ -87,8 +98,11 @@ const RegisterForm = () => {
               street: values.street,
               country: values.country,
               city: values.city,
+              lon: tmp.data[0].lon,
+              lat: tmp.data[0].lat,
             },
           };
+
           res = await register(registerDto);
           if (!res || !res.data) {
             WarningMessage("Something went wrong, try again later...");

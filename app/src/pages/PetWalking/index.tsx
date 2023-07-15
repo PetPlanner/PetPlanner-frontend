@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { Circle, MapContainer, TileLayer, useMap } from "react-leaflet";
 import Card from "../../components/Card";
 import "./index.scss";
 import L from "leaflet";
@@ -35,7 +35,12 @@ const WalkingPage = () => {
               style={{ height: "100%", opacity: "1" }}
             >
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              <MapComponent />
+              {/* <MapComponent /> */}
+              <Circle
+                color="red"
+                center={[45.246219799792556, 19.851756995545784]}
+                radius={500}
+              ></Circle>
             </MapContainer>
           </div>
         </div>
