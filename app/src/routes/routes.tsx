@@ -8,6 +8,7 @@ import MyProfilePage from "../pages/MyProfile";
 import WalkingPage from "../pages/PetWalking";
 import PetPage from "../pages/PetPage";
 import VetStationPage from "../pages/VetStation";
+import PetHotel from "../pages/PetHotel";
 
 let unregisteredPages = {
   Landing: {
@@ -37,6 +38,10 @@ let unregisteredPages = {
   VetStation: {
     path: "/vet",
     component: <VetStationPage />,
+  },
+  PetHotel: {
+    path: "/pet-hotel",
+    component: <PetHotel />,
   },
   Pet: {
     path: "/pet/:id",

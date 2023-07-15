@@ -4,14 +4,17 @@ import { searchVet } from "../../services/vetService";
 import { WarningMessage } from "../../utils/toastService/toastService";
 import { useState } from "react";
 import VetStation from "../../model/vetStation";
+import Hotel from "../../model/hotel";
+import { searchHotel } from "../../services/hotelService";
 
 interface ChildProps {
-  onData: (data: VetStation) => void;
+  onData: (data: VetStation | Hotel) => void;
+  isVet: boolean;
 }
 
-const SearchComponent: React.FC<ChildProps> = ({ onData }) => {
+const SearchComponent: React.FC<ChildProps> = ({ onData, isVet }) => {
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [data, setData] = useState<VetStation[]>([]);
+  const [data, setData] = useState<VetStation[] | Hotel[]>([]);
 
   const getSearchResult = () => {
     let retVal = [];
@@ -43,7 +46,7 @@ const SearchComponent: React.FC<ChildProps> = ({ onData }) => {
           validate={(values) => {}}
           onSubmit={async (values, { setSubmitting }) => {
             let res: any;
-            res = await searchVet(values);
+            res = isVet ? await searchVet(values) : await searchHotel(values);
             if (!res || !res.data) {
               WarningMessage("Something went wrong.");
               return;

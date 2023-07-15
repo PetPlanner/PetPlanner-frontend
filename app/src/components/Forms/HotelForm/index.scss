@@ -1,0 +1,21 @@
+@import "../../../assets/styles/main.scss";
+
+.pet-hotel__form {
+  box-sizing: border-box;
+  padding: 5%;
+
+  &__row {
+    display: flex;
+    justify-content: space-around;
+
+    &--elem {
+      display: flex;
+      align-items: center;
+
+      &-data {
+        font-size: 1.5rem;
+        padding-left: 2rem;
+      }
+    }
+  }
+}

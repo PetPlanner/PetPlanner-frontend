@@ -164,7 +164,7 @@ const VetStationPage = () => {
     <div className="vet-station">
       <Card width="80vw" height="80vh" backgroundColor="rgb(240, 248, 255)">
         <div className="vet-station__search">
-          <SearchComponent onData={handleData}></SearchComponent>
+          <SearchComponent onData={handleData} isVet={true}></SearchComponent>
 
           {context.user.role === "ADMIN" && (
             <div className="vet-station__search--button">
