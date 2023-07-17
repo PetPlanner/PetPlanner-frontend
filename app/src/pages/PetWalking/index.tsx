@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import walkerIcon from "../../assets/images/dog-walking (2).png";
+import startIcon from "../../assets/images/owner.png";
 import "leaflet/dist/leaflet.css";
 import useRouteProtector from "../../utils/routeProtector/routeProtector";
 import { useContext, useEffect, useState } from "react";
@@ -12,9 +13,14 @@ import AuthContext from "../../utils/store/AuthContext";
 import { findUserById, findWalkersByCity } from "../../services/userService";
 import { WarningMessage } from "../../utils/toastService/toastService";
 import NavButton from "../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 let WalkerIcon = L.icon({
   iconUrl: walkerIcon,
+  shadowUrl: iconShadow,
+});
+let StartIcon = L.icon({
+  iconUrl: startIcon,
   shadowUrl: iconShadow,
 });
 
@@ -22,6 +28,7 @@ const WalkingPage = () => {
   const [user, setUser] = useState();
   const [walkers, setWalkers] = useState();
   const contex = useContext(AuthContext);
+  const navigate = useNavigate();
   useRouteProtector({
     roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
   });
@@ -38,7 +45,16 @@ const WalkingPage = () => {
             <div>
               <h3 style={{ fontSize: "1.4rem" }}>Walker Details</h3>
               <p style={{ fontSize: "1.2rem" }}>
-                Phone Number: {walker.phoneNumber}
+                <div>Email: {walker.email}</div>
+                <div>Phone Number: {walker.phoneNumber}</div>
+                <div
+                  id="msg-btn"
+                  onClick={() => {
+                    navigate("/new-message");
+                  }}
+                >
+                  Send Message
+                </div>
               </p>
             </div>
           </Popup>
@@ -84,14 +100,24 @@ const WalkingPage = () => {
             >
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
               {user && (
-                <Circle
-                  color="red"
-                  center={[
-                    (user as any).address.lat,
-                    (user as any).address.lon,
-                  ]}
-                  radius={500}
-                ></Circle>
+                <>
+                  <Circle
+                    color="orange"
+                    center={[
+                      (user as any).address.lat,
+                      (user as any).address.lon,
+                    ]}
+                    radius={500}
+                  ></Circle>
+                  <Circle
+                    color="red"
+                    center={[
+                      (user as any).address.lat,
+                      (user as any).address.lon,
+                    ]}
+                    radius={5}
+                  ></Circle>
+                </>
               )}
               {walkers && renderWalkers()}
             </MapContainer>

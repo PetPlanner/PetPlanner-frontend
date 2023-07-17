@@ -1,0 +1,29 @@
+@import "../../assets/styles/main.scss";
+
+.message-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &__content {
+    width: 90%;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-top: 2px solid lightgrey;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(230, 230, 230) !important;
+    }
+    &--title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    &--message {
+      font-size: 1.2rem;
+    }
+    &--date {
+      font-size: 1.2rem;
+    }
+  }
+}

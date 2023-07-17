@@ -1,0 +1,96 @@
+@import "../../assets/styles/main.scss";
+
+.new-message-page {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 5vh;
+  box-sizing: border-box;
+
+  &__title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $color-logo-border;
+  }
+
+  &__content {
+    height: 85%;
+    width: 100%;
+    padding-top: 3rem;
+    display: flex;
+    box-sizing: border-box;
+
+    &__sidebar {
+      height: 100%;
+      width: 20%;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+      &__item {
+        display: flex;
+        align-items: center;
+        height: 10%;
+        padding-left: 5%;
+        cursor: pointer;
+        border-bottom: 1px solid lightgray;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: rgb(1, 152, 1);
+          color: white;
+        }
+        &--icon {
+          height: 50%;
+          width: 15%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+
+        &--text {
+          margin-left: 3rem;
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+      }
+    }
+
+    &__container {
+      padding: 0 10% 0 5%;
+      width: 100%;
+      height: 100%;
+
+      &--to,
+      &--subject {
+        width: 100%;
+        height: 3.5rem;
+        margin-bottom: 1rem;
+      }
+
+      &--message {
+        width: 100%;
+        height: 50%;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+#send-btn {
+  margin-top: 3%;
+  background-color: rgb(1, 152, 1);
+  color: white;
+  text-align: center;
+  padding: 2% 0%;
+  font-size: 1.7rem;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+#send-btn:hover {
+  font-size: 2rem;
+  background-color: green;
+}
