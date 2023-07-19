@@ -11,6 +11,7 @@ import VetStationPage from "../pages/VetStation";
 import PetHotel from "../pages/PetHotel";
 import InboxPage from "../pages/Inbox";
 import NewMessagePage from "../pages/NewMessage";
+import PetTrainingPage from "../pages/PetTraining";
 
 let unregisteredPages = {
   Landing: {
@@ -60,6 +61,10 @@ let unregisteredPages = {
   DisplayMessagePage: {
     path: "/new-message/:id",
     component: <NewMessagePage />,
+  },
+  PetTrainingPage: {
+    path: "/pet-training",
+    component: <PetTrainingPage />,
   },
   Unauthorized: {
     path: "/401",
