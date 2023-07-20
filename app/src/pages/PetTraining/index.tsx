@@ -1,13 +1,88 @@
+import { useContext, useEffect, useState } from "react";
 import Card from "../../components/Card";
 import CommandCard from "../../components/CommandCard";
 import "./index.scss";
+import { findByRole } from "../../services/userService";
+import { WarningMessage } from "../../utils/toastService/toastService";
+import AuthContext from "../../utils/store/AuthContext";
+import TrainerCard from "../../components/TrainerCard";
 const PetTrainingPage = () => {
+  const [trainers, setTrainers] = useState([]);
+  const context = useContext(AuthContext);
+  const [number, setNumber] = useState(0);
+
+  const fetchTrainers = async () => {
+    let res: any;
+    res = await findByRole("TRAINER");
+    if (!res || !res.data) {
+      WarningMessage("Something went wrong.");
+      return;
+    }
+    setTrainers(res.data);
+    console.log(res.data);
+  };
+
+  useEffect(() => {
+    fetchTrainers();
+  }, [context.user.id]);
+
+  const getTrainers = () => {
+    let retVal = [];
+    for (let t of trainers) {
+      retVal.push(
+        <div className="pet-training__container__trainers--card">
+          <TrainerCard
+            img={`/${(t as any).firstname}.jpg`}
+            name={(t as any).firstname + " " + (t as any).lastname}
+            email={(t as any).email}
+          />
+        </div>
+      );
+    }
+
+    return retVal;
+  };
+
+  const tmp = (array: any) => {
+    if (number === trainers.length) {
+      return array.slice(0, 2);
+    } else if (number === trainers.length - 1) {
+      return [array[trainers.length - 1], array[0]];
+    } else {
+      return array.slice(number, number + 2);
+    }
+  };
+
+  const changeCounter = (direction: string) => {
+    if (direction === "left") {
+      if (number !== 0) {
+        setNumber(number - 1);
+      } else setNumber(trainers.length);
+    } else {
+      if (number !== trainers.length) {
+        setNumber(number + 1);
+      } else setNumber(0);
+    }
+  };
+
   return (
     <div className="pet-training">
       <Card width="80vw" height="80vh" backgroundColor="rgb(240, 248, 255)">
         <div className="pet-training__container">
           <div className="pet-training__container__trainers">
-            Ceo zivot sam u trening!
+            <div
+              className="arrow-left"
+              onClick={() => {
+                changeCounter("left");
+              }}
+            ></div>
+            {trainers && tmp(getTrainers())}
+            <div
+              className="arrow-right"
+              onClick={() => {
+                changeCounter("right");
+              }}
+            ></div>
           </div>
           <div className="pet-training__container__commands">
             <div className="pet-training__container__commands--cmd">

@@ -69,7 +69,6 @@ export const AuthContextProvider = (props: any) => {
     const remainingTime = calculateRemainingTime(
       Number(expiresIn.toString() + "000")
     );
-    console.log(remainingTime);
     localStorage.setItem("token", token);
     localStorage.setItem("expires", expiresIn.toString() + "000");
 

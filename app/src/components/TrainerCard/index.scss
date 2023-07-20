@@ -1,0 +1,73 @@
+@import "../../assets//styles/main.scss";
+
+.trainer-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-image: url("../../assets/images/tcard.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2rem;
+  box-sizing: border-box;
+
+  &--img {
+    width: 30%;
+    height: 60%;
+    border-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    // background-image: url("../../assets/images/luke.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__data {
+    width: 50%;
+    height: 50%;
+
+    &--btn {
+      background-color: #e4e1ca;
+      padding: 5px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 10px;
+      &:hover {
+        background-color: #d6d4bd;
+      }
+    }
+
+    &__row {
+      display: flex;
+      margin-bottom: 0.5rem;
+
+      &--name-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-image: url("../../assets/images/trainer.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      &--email-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-image: url("../../assets/images/gmail.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      &--name,
+      &--email {
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-left: 2rem;
+      }
+    }
+  }
+}

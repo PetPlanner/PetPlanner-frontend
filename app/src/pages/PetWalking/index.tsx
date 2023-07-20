@@ -85,7 +85,6 @@ const WalkingPage = () => {
       return;
     }
     setWalkers(res.data);
-    console.log(res.data);
   };
 
   return (

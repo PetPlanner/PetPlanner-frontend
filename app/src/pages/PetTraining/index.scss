@@ -15,7 +15,15 @@
     &__trainers {
       height: 50%;
       width: 100%;
-      background-color: green;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      &--card {
+        height: 85%;
+        width: 40%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+      }
     }
 
     &__commands {
@@ -28,8 +36,40 @@
       &--cmd {
         width: 20%;
         height: 85%;
-        background-color: blue;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
       }
     }
+  }
+}
+
+.arrow-left {
+  width: 5rem;
+  height: 5rem;
+  background-image: url("../../assets/images/arrow.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+}
+
+.arrow-right {
+  width: 5rem;
+  height: 5rem;
+  background-image: url("../../assets/images/arrow.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  rotate: 180deg;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    width: 5.5rem;
+    height: 5.5rem;
   }
 }

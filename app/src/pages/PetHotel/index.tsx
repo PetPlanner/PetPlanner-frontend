@@ -40,7 +40,6 @@ const PetHotel = () => {
   const handleData = async (data: any) => {
     setSelectedStation(data);
     fetchComments(data.id);
-    console.log(data);
   };
 
   const getCommentList = () => {

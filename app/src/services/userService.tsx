@@ -7,3 +7,7 @@ export async function findUserById(id: number) {
 export async function findWalkersByCity(city: string) {
   return await request(`/user/city/${city}`);
 }
+
+export async function findByRole(role: string) {
+  return await request(`/user/role/${role}`);
+}

@@ -25,7 +25,6 @@ const NewMessagePage = () => {
         WarningMessage("Something went wrong.");
         return;
       }
-      console.log(res.data);
       setTo(res.data.sender);
       setMessage(res.data.message);
       setSubject(res.data.subject);
