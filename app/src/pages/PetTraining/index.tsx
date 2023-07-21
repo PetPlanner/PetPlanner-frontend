@@ -6,9 +6,11 @@ import { findByRole } from "../../services/userService";
 import { WarningMessage } from "../../utils/toastService/toastService";
 import AuthContext from "../../utils/store/AuthContext";
 import TrainerCard from "../../components/TrainerCard";
+import { useNavigate } from "react-router-dom";
 const PetTrainingPage = () => {
   const [trainers, setTrainers] = useState([]);
   const context = useContext(AuthContext);
+  const navigate = useNavigate();
   const [number, setNumber] = useState(0);
 
   const fetchTrainers = async () => {
@@ -85,14 +87,20 @@ const PetTrainingPage = () => {
             ></div>
           </div>
           <div className="pet-training__container__commands">
-            <div className="pet-training__container__commands--cmd">
+            <div
+              className="pet-training__container__commands--cmd"
+              onClick={() => navigate("/training/come")}
+            >
               <CommandCard
                 img="/come.jpg"
                 title="How to train your dog to come when called"
                 subtitle="Teach your dog to come to you when called."
               ></CommandCard>
             </div>
-            <div className="pet-training__container__commands--cmd">
+            <div
+              className="pet-training__container__commands--cmd"
+              onClick={() => navigate("/training/stay")}
+            >
               <CommandCard
                 img="/stay.jpg"
                 title="How to train a dog to stay"
@@ -100,14 +108,20 @@ const PetTrainingPage = () => {
               ></CommandCard>
             </div>
 
-            <div className="pet-training__container__commands--cmd">
+            <div
+              className="pet-training__container__commands--cmd"
+              onClick={() => navigate("/training/lie")}
+            >
               <CommandCard
                 img="/lie.jpg"
                 title="How to train your dog to lie down"
                 subtitle="Teach your dog to lie down in six easy steps."
               ></CommandCard>
             </div>
-            <div className="pet-training__container__commands--cmd">
+            <div
+              className="pet-training__container__commands--cmd"
+              onClick={() => navigate("/training/sit")}
+            >
               <CommandCard
                 img="/sit.jpg"
                 title="How to train a dog to sit"
