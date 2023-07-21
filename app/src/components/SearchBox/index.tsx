@@ -50,7 +50,7 @@ const SearchBox = (props: any) => {
           }}
         >
           <Button
-            style={{ backgroundColor: "#b30c2e" }}
+            style={{ backgroundColor: "hsl(345, 100%, 47%)" }}
             variant="contained"
             color="primary"
             onClick={() => {

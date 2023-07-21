@@ -74,7 +74,7 @@ const PetTaxi = () => {
           {renderStartButton() && (
             <Button
               style={{
-                backgroundColor: "#b30c2e",
+                backgroundColor: "hsl(345, 100%, 47%)",
                 color: "white",
                 marginTop: "3rem",
                 width: "100%",

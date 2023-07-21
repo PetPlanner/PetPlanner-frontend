@@ -10,10 +10,19 @@ import {
 import CommentModel from "../../model/comment";
 import { create, findByObjectIdAndStatus } from "../../services/commentService";
 import ImageGallery from "react-image-gallery";
-import { Rating } from "@mui/material";
 import Comment from "../../components/Comment";
 import HotelForm from "../../components/Forms/HotelForm";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  Rating,
+} from "@mui/material";
 import useRouteProtector from "../../utils/routeProtector/routeProtector";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { createHotel } from "../../services/hotelService";
 
 const images = [
   {
@@ -25,6 +34,46 @@ const images = [
     thumbnail: "http://localhost:3000/hotel5555.jpg",
   },
 ];
+
+const initValue = {
+  name: "",
+  capacity: "",
+  hostId: "",
+  country: "",
+  city: "",
+  street: "",
+  lon: "",
+  lat: "",
+};
+const validationRule = (values: any) => {
+  const required = "This field is required.";
+  const errors: any = {};
+  if (!values.name) {
+    errors.name = required;
+  }
+  if (!values.capacity) {
+    errors.capacity = required;
+  }
+  if (!values.hostId) {
+    errors.hostId = required;
+  }
+  if (!values.country) {
+    errors.country = required;
+  }
+  if (!values.street) {
+    errors.street = required;
+  }
+  if (!values.lon) {
+    errors.lon = required;
+  }
+  if (!values.city) {
+    errors.city = required;
+  }
+  if (!values.lat) {
+    errors.lat = required;
+  }
+  return errors;
+};
 
 const PetHotel = () => {
   const context = useContext(AuthContext);
@@ -180,6 +229,186 @@ const PetHotel = () => {
           </div>
         </div>
       </Card>
+      <Dialog
+        open={open}
+        aria-labelledby="dialog-title"
+        onClose={() => setOpen(false)}
+      >
+        <DialogTitle id="dialog-title">Add new hotel</DialogTitle>
+        <DialogContent>
+          <div className="vet-dialog-content">
+            <Formik
+              initialValues={initValue}
+              validate={validationRule}
+              onSubmit={async (values, { setSubmitting }) => {
+                let res;
+                let dto: any = {
+                  name: values.name,
+                  capacity: values.capacity,
+                  hostId: values.hostId,
+                  address: {
+                    country: values.country,
+                    city: values.city,
+                    street: values.street,
+                    lon: values.lon,
+                    lat: values.lat,
+                  },
+                };
+                res = await createHotel(dto);
+                if (!res || !res.data) {
+                  WarningMessage("Something went wrong");
+                  return;
+                }
+                setSubmitting(false);
+              }}
+            >
+              {({ isSubmitting }) => (
+                <Form className="vet-container">
+                  <div className="vet-container--wrapper">
+                    <div className="vet-container__row">
+                      <div>
+                        <Field
+                          type="text"
+                          name="name"
+                          className="vet-container__row--field"
+                          placeholder="Name"
+                        />
+                        <ErrorMessage
+                          name="name"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                      <div>
+                        <Field
+                          type="text"
+                          name="capacity"
+                          className="vet-container__row--field"
+                          placeholder="Capacity"
+                        />
+                        <ErrorMessage
+                          name="capacity"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                    </div>
+                    <div className="vet-container__row">
+                      <div>
+                        <Field
+                          type="text"
+                          name="country"
+                          className="vet-container__row--field"
+                          placeholder="Country"
+                        />
+                        <ErrorMessage
+                          name="country"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                      <div>
+                        <Field
+                          type="text"
+                          name="city"
+                          className="vet-container__row--field"
+                          placeholder="City"
+                        />
+                        <ErrorMessage
+                          name="city"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                    </div>
+                    <div className="vet-container__row">
+                      <div>
+                        <Field
+                          type="text"
+                          name="lon"
+                          className="vet-container__row--field"
+                          placeholder="Lon"
+                        />
+                        <ErrorMessage
+                          name="lon"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                      <div>
+                        <Field
+                          type="text"
+                          name="lat"
+                          className="vet-container__row--field"
+                          placeholder="Lat"
+                        />
+                        <ErrorMessage
+                          name="lat"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                    </div>
+                    <div className="vet-container__row">
+                      <div>
+                        <Field
+                          type="text"
+                          name="street"
+                          className="vet-container__row--field"
+                          placeholder="Street"
+                        />
+                        <ErrorMessage
+                          name="street"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                      <div>
+                        <Field
+                          type="text"
+                          name="hostId"
+                          className="vet-container__row--field"
+                          placeholder="HostId"
+                        />
+                        <ErrorMessage
+                          name="hostId"
+                          component="div"
+                          className="vet-container__row--error"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="vet-container__row__buttons">
+                      <DialogActions>
+                        <div className="dialog-buttons">
+                          <button
+                            className="button-16"
+                            role="button"
+                            type="button"
+                            onClick={() => setOpen(false)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="button-15"
+                            role="button"
+                            type="submit"
+                            onClick={async () => {
+                              setOpen(false);
+                            }}
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </DialogActions>
+                    </div>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

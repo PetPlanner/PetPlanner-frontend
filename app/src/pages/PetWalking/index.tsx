@@ -35,6 +35,11 @@ const WalkingPage = () => {
 
   const renderWalkers = () => {
     let retVal = [];
+    if ((walkers as any).length === 0) {
+      WarningMessage("There are no walkers in this town.");
+      return;
+    }
+
     for (let walker of walkers as any) {
       retVal.push(
         <Marker
