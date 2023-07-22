@@ -11,3 +11,7 @@ export async function createPet(dto: any) {
 export async function findById(id: number) {
   return await request("/pet/" + id);
 }
+
+export async function addVaccine(dto: any) {
+  return await request("/pet/vaccine", dto, HttpMethod.POST);
+}
