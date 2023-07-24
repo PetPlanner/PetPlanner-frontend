@@ -15,6 +15,11 @@ const Header = () => {
   const getLogoutButton = () => {
     return (
       <>
+        <NavButton text="Forum" submitHandler={() => navigate("/forum")} />
+        <NavButton
+          text="Reminder"
+          submitHandler={() => navigate("/reminder")}
+        />
         <NavButton text="Inbox" submitHandler={() => navigate("/inbox")} />
         <NavButton
           text="Profile"

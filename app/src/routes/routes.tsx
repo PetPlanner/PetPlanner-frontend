@@ -13,6 +13,8 @@ import InboxPage from "../pages/Inbox";
 import NewMessagePage from "../pages/NewMessage";
 import PetTrainingPage from "../pages/PetTraining";
 import TrainingPage from "../pages/Training";
+import ForumPage from "../pages/Forum";
+import ReminderPage from "../pages/Reminder";
 
 let unregisteredPages = {
   Landing: {
@@ -70,6 +72,14 @@ let unregisteredPages = {
   TrainingPage: {
     path: "/training/:type",
     component: <TrainingPage />,
+  },
+  ReminderPage: {
+    path: "/reminder",
+    component: <ReminderPage />,
+  },
+  ForumPage: {
+    path: "/forum",
+    component: <ForumPage />,
   },
   Unauthorized: {
     path: "/401",
