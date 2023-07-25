@@ -15,6 +15,7 @@ import PetTrainingPage from "../pages/PetTraining";
 import TrainingPage from "../pages/Training";
 import ForumPage from "../pages/Forum";
 import ReminderPage from "../pages/Reminder";
+import TopicPage from "../pages/Topic";
 
 let unregisteredPages = {
   Landing: {
@@ -80,6 +81,10 @@ let unregisteredPages = {
   ForumPage: {
     path: "/forum",
     component: <ForumPage />,
+  },
+  TopicPage: {
+    path: "/topic/:id",
+    component: <TopicPage />,
   },
   Unauthorized: {
     path: "/401",

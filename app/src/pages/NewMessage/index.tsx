@@ -8,6 +8,7 @@ import {
   WarningMessage,
 } from "../../utils/toastService/toastService";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 
 const NewMessagePage = () => {
   const [to, setTo] = useState<string>();
@@ -16,6 +17,9 @@ const NewMessagePage = () => {
   const contex = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
 
   const fetchMessage = async () => {
     if (id != undefined) {

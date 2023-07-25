@@ -7,12 +7,15 @@ import { WarningMessage } from "../../utils/toastService/toastService";
 import AuthContext from "../../utils/store/AuthContext";
 import TrainerCard from "../../components/TrainerCard";
 import { useNavigate } from "react-router-dom";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 const PetTrainingPage = () => {
   const [trainers, setTrainers] = useState([]);
   const context = useContext(AuthContext);
   const navigate = useNavigate();
   const [number, setNumber] = useState(0);
-
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
   const fetchTrainers = async () => {
     let res: any;
     res = await findByRole("TRAINER");

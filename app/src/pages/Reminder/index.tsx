@@ -17,6 +17,7 @@ import {
   DialogActions,
 } from "@mui/material";
 import { ErrorMessage, Field, Formik, Form } from "formik";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 
 const initValue = {
   exactDate: "",
@@ -40,6 +41,9 @@ const ReminderPage = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [reminders, setReminders] = useState([]);
   const context = useContext(AuthContext);
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
 
   const fetchReminders = async () => {
     let res: any;

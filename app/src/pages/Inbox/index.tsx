@@ -6,10 +6,14 @@ import { findByRecieverId } from "../../services/messageService";
 import { WarningMessage } from "../../utils/toastService/toastService";
 import Message from "../../components/Message";
 import { useNavigate } from "react-router-dom";
+import useRouteProtector from "../../utils/routeProtector/routeProtector";
 const InboxPage = () => {
   const [messages, setMessages] = useState();
   const contex = useContext(AuthContext);
   const navigate = useNavigate();
+  useRouteProtector({
+    roles: ["CUSTOMER", "ADMIN", "DRIVER", "WALKER", "VET", "TRAINER"],
+  });
 
   const fetchMessages = async () => {
     let res: any;
